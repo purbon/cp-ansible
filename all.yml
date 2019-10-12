@@ -102,3 +102,5 @@
   tasks:
   - import_role:
       name: cloudalchemy.prometheus
+  - import_role:
+      name: cloudalchemy.grafana
