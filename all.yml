@@ -94,3 +94,11 @@
   tasks:
   - import_role:
       name: confluent.kafka_rest
+
+- name: Monitoring Provisioning
+  hosts: monitoring
+  tags:
+    - monitoring
+  tasks:
+  - import_role:
+      name: cloudalchemy.prometheus
