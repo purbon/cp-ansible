@@ -104,3 +104,11 @@
       name: cloudalchemy.prometheus
   - import_role:
       name: cloudalchemy.grafana
+
+- name: System Monitoring Provisioning
+  hosts: system_monitoring
+  tags:
+    - system_monitoring
+  tasks:
+  - import_role:
+      name: cloudalchemy.node-exporter
