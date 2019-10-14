@@ -1,6 +1,11 @@
 lowercaseOutputName: true
 
 rules:
+- pattern: kafka.producer:<type=(.+), client-id=(.+)><>Value
+  name: kafka_producer_$1_$2
+  type: GAUGE
+  labels:
+    clientId: "$2"
 # Special cases and very specific rules
 - pattern : kafka.server<type=(.+), name=(.+), clientId=(.+), topic=(.+), partition=(.*)><>Value
   name: kafka_server_$1_$2
@@ -15,9 +20,6 @@ rules:
   labels:
     clientId: "$3"
     broker: "$4:$5"
-- pattern : kafka.coordinator.(\w+)<type=(.+), name=(.+)><>Value
-  name: kafka_coordinator_$1_$2_$3
-  type: GAUGE
 
 # Generic per-second counters with 0-2 key/value pairs
 - pattern: kafka.(\w+)<type=(.+), name=(.+)PerSec\w*, (.+)=(.+), (.+)=(.+)><>Count
@@ -31,6 +33,7 @@ rules:
   type: COUNTER
   labels:
     "$4": "$5"
+  type: COUNTER
 - pattern: kafka.(\w+)<type=(.+), name=(.+)PerSec\w*><>Count
   name: kafka_$1_$2_$3_total
   type: COUNTER
