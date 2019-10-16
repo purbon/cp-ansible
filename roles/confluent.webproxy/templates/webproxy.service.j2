@@ -1,0 +1,20 @@
+[Unit]
+Description=An slim Apache Kafka Proxy
+After=network.target
+
+[Service]
+#EnvironmentFile=/path/to/app/conf/env
+Environment=APPLICATION_SECRET=ad31779d4ee49d5ad5162bf1429c32e2e9933f3b
+#PIDFile=/usr/share/slim-kafka-webaction-proxy/conf/RUNNING_PID
+WorkingDirectory=/usr/share/slim-kafka-webaction-proxy
+ExecStart=/usr/bin/slim-kafka-webaction-proxy -Dhttp.port=8080 -J-server
+Restart=on-failure
+#StartLimitIntervalSec=10
+User=root
+Group=root
+
+# See http://serverfault.com/a/695863
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

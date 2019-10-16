@@ -1,0 +1,41 @@
+---
+# tasks to install the webproxy in the target machine
+
+- name: Copy the webproxy package
+  copy:
+    src:  packages/slim-kafka-webaction-proxy_1.0-SNAPSHOT_all.deb
+    dest: /tmp/slim-kafka-webactions-proxy_1.0_all.deb
+  when: ansible_os_family == "Debian"
+
+- name: Install the .deb package with the proxy
+  apt:
+    deb: /tmp/slim-kafka-webactions-proxy_1.0_all.deb
+  when: ansible_os_family == "Debian"
+
+- name: Copy the webproxy package (RedHat)
+  copy:
+    src:  packages/slim-kafka-webaction-proxy_1.0.rpm
+    dest: /tmp/slim-kafka-webaction-proxy_1.0.rpm
+  when: ansible_os_family == "RedHat"
+
+- name: Install the .rpm package with the proxy
+  yum:
+    name: /tmp/slim-kafka-webaction-proxy_1.0.rpm
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Copy the application config file
+  template:
+    src: application.conf.j2
+    dest:  /etc/slim-kafka-webaction-proxy/application.conf
+    mode: 0644
+    owner: "{{webproxy.user}}"
+    group: "{{webproxy.group}}"
+
+- name: Copy the systemd config file
+  template:
+    src: webproxy.service.j2
+    dest: /etc/systemd/system/webproxy.service
+    mode: 0644
+    owner: "{{webproxy.user}}"
+    group: "{{webproxy.group}}"

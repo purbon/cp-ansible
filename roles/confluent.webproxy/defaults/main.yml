@@ -1,0 +1,5 @@
+---
+# defaults file for confluent.webproxy
+webproxy:
+  user: root
+  group: root

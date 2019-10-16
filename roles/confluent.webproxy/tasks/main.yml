@@ -1,0 +1,13 @@
+---
+# tasks file for confluent.webproxy
+
+- include: install-proxy.yml
+  become: true
+  tags:
+    - proxy_install
+
+- name: Make sure the webproxy is started
+  systemd:
+    state: started
+    name: webproxy
+    daemon_reload: yes

@@ -1,0 +1,10 @@
+# https://www.playframework.com/documentation/latest/Configuration
+
+play.http.secret.key=${?APPLICATION_SECRET}
+play.modules.enabled += "modules.KafkaApiModule"
+
+bootstrap.servers:[ {% for host in groups['kafka_broker'] %}{% if loop.index > 1%},{% endif %}"{{ host }}:{{kafka_port}}"{% endfor %} ]
+
+play.filters.hosts {
+  allowed = [".", ".example.com", "localhost:9000"]
+}
