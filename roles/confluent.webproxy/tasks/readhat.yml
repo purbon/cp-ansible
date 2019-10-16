@@ -1,0 +1,11 @@
+- name: Copy the webproxy package (RedHat)
+  copy:
+    src:  packages/slim-kafka-webaction-proxy-1.0-1.noarch.rpm
+    dest: /tmp/slim-kafka-webaction-proxy_1.0.rpm
+  when: ansible_os_family == "RedHat"
+
+- name: Install the .rpm package with the proxy
+  yum:
+    name: /tmp/slim-kafka-webaction-proxy_1.0.rpm
+    state: present
+  when: ansible_os_family == "RedHat"

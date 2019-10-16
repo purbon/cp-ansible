@@ -1,0 +1,11 @@
+- name: Copy the webproxy package
+  copy:
+    src:  packages/slim-kafka-webaction-proxy_1.0-SNAPSHOT_all.deb
+    dest: /tmp/slim-kafka-webactions-proxy_1.0_all.deb
+  when: ansible_os_family == "Debian"
+
+- name: Install the .deb package with the proxy
+  apt:
+    deb: /tmp/slim-kafka-webactions-proxy_1.0_all.deb
+  when: ansible_os_family == "Debian"
+  
