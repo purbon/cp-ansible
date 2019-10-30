@@ -72,3 +72,12 @@
   tasks:
   - import_role:
       name: confluent.control_center
+
+- name: OpenLDAP Server
+  hosts: ldap_server
+  gather_facts: no
+  tags:
+    - ldap_server
+  tasks:
+  - import_role:
+      name: mrlesmithjr.openldap
