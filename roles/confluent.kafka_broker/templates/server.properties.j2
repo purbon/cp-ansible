@@ -5,11 +5,13 @@ log.dirs={% for logdir in kafka_broker.datadir %}{% if loop.index > 1%},{% endif
 
 broker.id={{ broker_id | default(groups.kafka_broker.index(inventory_hostname) + 1)}}
 
+listeners={{kafka_broker_security_protocol}}://:{{kafka_port}}
+
 {% for key, value in kafka_broker.properties.items() %}
 {{key}}={{value}}
 {% endfor %}
 
-listeners={{kafka_broker_security_protocol}}://:{{kafka_port}}
+
 
 security.inter.broker.protocol={{kafka_broker_security_protocol}}
 {% if kafka_broker_ssl_enabled|bool %}
