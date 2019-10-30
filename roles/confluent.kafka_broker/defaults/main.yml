@@ -24,7 +24,7 @@ kafka_broker_sysctl:
   vm.dirty_ratio: 60
 
 kafka_broker_packages:
-  - confluent-kafka-2.12
+  - confluent-server
   - confluent-rebalancer
   - confluent-security
 
@@ -32,9 +32,9 @@ kafka_broker:
   user: cp-kafka
   group: confluent
   config_file: /etc/kafka/server.properties
-  systemd_file: /usr/lib/systemd/system/confluent-kafka.service
-  systemd_override: /etc/systemd/system/confluent-kafka.service.d
-  service_name: confluent-kafka
+  systemd_file: /usr/lib/systemd/system/confluent-server.service
+  systemd_override: /etc/systemd/system/confluent-server.service.d
+  service_name: confluent-server
   datadir:
     - /var/lib/kafka/data
   systemd:
