@@ -21,6 +21,8 @@ ssl.client.auth=false
 {% endif %}
 {% endif %}
 
+master.eligibility={{master_eligibility}}
+
 # Kafka Broker Configuration
 kafkastore.bootstrap.servers={% for host in groups['kafka_broker'] %}{% if loop.index > 1%},{% endif %}{{ host }}:{{kafka_port}}{% endfor %}
 
