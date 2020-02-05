@@ -15,7 +15,7 @@
 
 # Configure Environment
 - name: Configure rbac when rbac is enabled
-  include: configure_rbac.yml
+  include: configure-rbac.yml
   when: rbac_enabled|bool
 
 - name: Kafka Broker group
