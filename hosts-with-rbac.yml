@@ -83,7 +83,7 @@ all:
     kafka_broker:
       properties:
         num.io.threads: 15
-        super.users: User:kafka
+        super.users: User:CN=ip-172-31-31-151.eu-west-1.compute.internal,OU=TEST,O=CONFLUENT,L=PaloAlto,ST=Ca,C=US,User:CN=ip-172-31-36-47.eu-west-1.compute.internal,OU=TEST,O=CONFLUENT,L=PaloAlto,ST=Ca,C=US,User:CN=ip-172-31-15-31.eu-west-1.compute.internal,OU=TEST,O=CONFLUENT,L=PaloAlto,ST=Ca,C=US
 
     # schema_registry:
     #   properties:
