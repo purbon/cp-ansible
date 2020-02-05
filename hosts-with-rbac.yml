@@ -31,7 +31,7 @@ all:
 
     jolokia_enabled: false
     jmxexporter_enabled: false
-    confluent_server_enabled: false
+    confluent_server_enabled: true
     rbac_enabled: true
 
     mds_openapi_enabled: true
