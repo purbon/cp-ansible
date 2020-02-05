@@ -1,0 +1,9 @@
+---
+# Generate the token service key
+- name: Generate an RSA key keypair at {{ mds_default_keypair }}
+  shell: openssl genrsa -out {{ mds_default_keypair }} 2048
+  when: rbac_enabled|bool
+
+- name: Extract the public key at {{ mds_default_public_key }}
+  shell: openssl rsa -in {{ mds_default_keypair }} -outform PEM -pubout -out {{ mds_default_keypair }} 
+  when: rbac_enabled|bool

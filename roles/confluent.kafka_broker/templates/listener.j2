@@ -12,6 +12,17 @@ listener.name.{{listener.value.name|lower}}.ssl.truststore.type=pkcs12
 listener.name.{{listener.value.name|lower}}.ssl.enabled.protocols=TLSv1.2
 {% endif %}
 {% endif %}
+
+{% if rbac_enabled|bool %}
+############################# TOKEN LISTENER #############################
+listener.name.token.sasl.enabled.mechanisms=OAUTHBEARER
+listener.name.token.oauthbearer.sasl.jaas.config= \
+    org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required \
+        publicKeyPath="{{ mds_default_public_key }}";
+listener.name.token.oauthbearer.sasl.server.callback.handler.class=io.confluent.kafka.server.plugins.auth.token.TokenBearerValidatorCallbackHandler
+listener.name.token.oauthbearer.sasl.login.callback.handler.class=io.confluent.kafka.server.plugins.auth.token.TokenBearerServerLoginCallbackHandler
+{% endif %}
+
 {% if listener['value']['ssl_mutual_auth_enabled'] | default(ssl_mutual_auth_enabled) | bool %}
 listener.name.{{listener.value.name|lower}}.ssl.client.auth=required
 {% endif %}

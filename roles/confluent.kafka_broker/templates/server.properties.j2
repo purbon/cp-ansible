@@ -53,6 +53,59 @@ confluent.schema.registry.ssl.key.password={{kafka_broker_keystore_keypass}}
 {% endif %}
 {% endif %}
 
+{% if rbac_enabled|bool %}
+############################# Authorization Settings #############################
+authorizer.class.name=io.confluent.kafka.security.authorizer.ConfluentServerAuthorizer
+confluent.authorizer.access.rule.providers=ZK_ACL,CONFLUENT
+confluent.authorizer.group.provider=CONFLUENT
+
+#############################  MDS Listener - which port to listen on #############################
+confluent.metadata.server.listeners=https://0.0.0.0:8090,http://0.0.0.0:8091
+confluent.metadata.server.advertised.listeners=https://{{ inventory_hostname }}:8090,\
+                                               http://{{ inventory_hostname }}:8091
+
+##### SSL Settings for MDS #####
+confluent.metadata.server.ssl.keystore.location={{kafka_broker_keystore_path}}
+confluent.metadata.server.ssl.keystore.password={{kafka_broker_keystore_storepass}}
+confluent.metadata.server.ssl.key.password={{kafka_broker_keystore_keypass}}
+confluent.metadata.server.ssl.truststore.location={{kafka_broker_truststore_path}}
+confluent.metadata.server.ssl.truststore.password={{kafka_broker_truststore_storepass}}
+
+############################# MDS Token Service Settings - enable token generation #############################
+confluent.metadata.server.token.auth.enable=true
+confluent.metadata.server.token.max.lifetime.ms=3600000
+confluent.metadata.server.token.key.path={{ mds_default_keypair }}
+confluent.metadata.server.public.key.path={{ mds_default_public_key }}
+confluent.metadata.server.token.signature.algorithm=RS256
+confluent.metadata.server.authentication.method=BEARER
+
+############################# Identity Provider Settings(LDAP - local OpenLDAP) #############################
+ldap.java.naming.factory.initial=com.sun.jndi.ldap.LdapCtxFactory
+ldap.com.sun.jndi.ldap.read.timeout=3000
+ldap.java.naming.provider.url=ldap:{{ mds_ldap_server }}
+# how mds authenticates to ldap server
+ldap.java.naming.security.principal=CN=mds,CN=Demo,DC=confluent,DC=io
+ldap.java.naming.security.credentials={{ mds_ldap_credentials }}
+ldap.java.naming.security.authentication=simple
+# ldap search mode (GROUPS is default)
+#ldap.search.mode=GROUPS
+#ldap.search.mode=USERS
+# how to search for users
+ldap.user.search.base=CN=Demo,DC=confluent,DC=io
+# how to search for groups
+ldap.group.search.base=CN=Demo,DC=confluent,DC=io
+# which attribute in ldap record corresponds to user name
+ldap.user.name.attribute=sAMAccountName
+ldap.user.memberof.attribute.pattern=CN=(.*),CN=Demo,DC=confluent,DC=io
+ldap.group.object.class=group
+ldap.group.name.attribute=sAMAccountName
+ldap.group.member.attribute.pattern=CN=(.*),CN=Demo,DC=confluent,DC=io
+
+########################### Enable Swagger #############################
+confluent.metadata.server.openapi.enable={{ mds_openapi_enabled }}
+
+{% endif %}
+
 ## Metrics Reporter Configuration
 confluent.metrics.reporter.security.protocol={{kafka_broker_listeners.external | kafka_protocol_defaults(sasl_protocol, ssl_enabled) }}
 {% if kafka_broker_listeners.external.ssl_enabled|bool %}

@@ -14,6 +14,10 @@
   when: ansible_os_family == "Debian"
 
 # Configure Environment
+- name: Configure rbac when rbac is enabled
+  include: configure_rbac.yml
+  when: rbac_enabled|bool
+
 - name: Kafka Broker group
   group:
     name: "{{kafka_broker.group}}"
