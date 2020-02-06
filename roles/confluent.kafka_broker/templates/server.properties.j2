@@ -91,15 +91,15 @@ ldap.java.naming.security.authentication=simple
 #ldap.search.mode=GROUPS
 #ldap.search.mode=USERS
 # how to search for users
-ldap.user.search.base=CN=Demo,DC=confluent,DC=io
+ldap.user.search.base=cn=people,dc=confluent,dc=local
 # how to search for groups
-ldap.group.search.base=CN=Demo,DC=confluent,DC=io
+ldap.group.search.base=cn=people,dc=confluent,dc=local
 # which attribute in ldap record corresponds to user name
-ldap.user.name.attribute=sAMAccountName
-ldap.user.memberof.attribute.pattern=CN=(.*),CN=Demo,DC=confluent,DC=io
+ldap.user.name.attribute=uid
+ldap.user.memberof.attribute.pattern=ou
 ldap.group.object.class=group
-ldap.group.name.attribute=sAMAccountName
-ldap.group.member.attribute.pattern=CN=(.*),CN=Demo,DC=confluent,DC=io
+ldap.group.name.attribute=cn
+ldap.group.member.attribute.pattern=CN=(.*),cn=people,dc=confluent,dc=local
 
 ########################### Enable Swagger #############################
 confluent.metadata.server.openapi.enable={{ mds_openapi_enabled }}
