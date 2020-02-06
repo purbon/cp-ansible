@@ -64,6 +64,15 @@ confluent.controlcenter.schema.registry.ssl.key.password={{control_center_keysto
 {% endif %}
 {% endif %}
 
+{% if rbac_enabled|bool %}
+############################# Control Center RBAC Settings #############################
+# Enable RBAC authorization in Control Center by providing a comma-separated list of Metadata Service (MDS) URLs (http://localhost:8090)
+confluent.metadata.bootstrap.server.urls={% for host in groups['kafka_broker'] %}{% if loop.index > 1%},{% endif %}http://{{ host }}:8091{% endfor %}
+confluent.metadata.basic.auth.user.info=hermes:hermes
+confluent.controlcenter.rest.authentication.method=BEARER
+public.key.path={{ mds_default_public_key }}
+{% endif %}
+
 {% set connect_servers = groups.get('kafka_connect', []) %}
 {% if connect_servers %}
 # Kafka Connect Configuration
