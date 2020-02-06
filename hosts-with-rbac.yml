@@ -38,6 +38,8 @@ all:
     mds_ldap_server: ip-172-31-10-47.eu-west-1.compute.internal
     mds_ldap_credentials: admin
 
+    kafka_broker_default_interal_replication_factor: 1
+
     #### Schema Validation ####
     ## Schema Validation with the kafka configuration is disabled by default. To enable uncomment this line:
     ## Schema Validation only works with confluent_server_enabled: true
@@ -102,27 +104,7 @@ all:
 
 zookeeper:
   hosts:
-    ip-172-31-29-76.eu-west-1.compute.internal:
-      ## By default the first host will get zookeeper id=1, second gets id=2. Set zookeeper_id to customize
-      # zookeeper_id: 2
-
-      ## For kerberos sasl protocol, EACH host will need these two variables:
-      # zookeeper_kerberos_keytab_path: <The path on ansible host to keytab file, eg. /tmp/keytabs/zookeeper-ip-172-31-34-246.us-east-2.compute.internal.keytab>
-      # zookeeper_kerberos_principal: <The principal configured in kdc server, eg. zookeeper/ip-172-31-34-246.us-east-2.compute.internal@REALM.EXAMPLE.COM>
-    ip-172-31-46-158.eu-west-1.compute.internal:
-      # zookeeper_id: 3
-    ip-172-31-11-115.eu-west-1.compute.internal:
-      # zookeeper_id: 1
+    ip-172-31-17-205.eu-west-1.compute.internal:
 kafka_broker:
   hosts:
-    ip-172-31-31-151.eu-west-1.compute.internal:
-      ## By default the first host will get broker id=1, second gets id=2. Set broker_id to customize
-      # broker_id: 3
-
-      ## For kerberos sasl protocol, EACH host will need these two variables:
-      # kafka_broker_kerberos_keytab_path: <The path on ansible host to keytab file, eg. /tmp/keytabs/ip-172-31-34-246.us-east-2.compute.internal>
-      # kafka_broker_kerberos_principal: <The principal configured in kdc server, eg. kafka/ip-172-31-34-246.us-east-2.compute.internal@REALM.EXAMPLE.COM>
-    ip-172-31-36-47.eu-west-1.compute.internal:
-      # broker_id: 2
-    ip-172-31-15-31.eu-west-1.compute.internal:
-      # broker_id: 1
+    ip-172-31-21-162.eu-west-1.compute.internal:
