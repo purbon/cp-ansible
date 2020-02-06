@@ -84,7 +84,7 @@ ldap.java.naming.factory.initial=com.sun.jndi.ldap.LdapCtxFactory
 ldap.com.sun.jndi.ldap.read.timeout=3000
 ldap.java.naming.provider.url=ldap:{{ mds_ldap_server }}
 # how mds authenticates to ldap server
-ldap.java.naming.security.principal=CN=mds,CN=Demo,DC=confluent,DC=io
+ldap.java.naming.security.principal=cn=admin,dc=confluent,dc=local
 ldap.java.naming.security.credentials={{ mds_ldap_credentials }}
 ldap.java.naming.security.authentication=simple
 # ldap search mode (GROUPS is default)
