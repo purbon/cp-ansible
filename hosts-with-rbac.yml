@@ -105,6 +105,10 @@ all:
 zookeeper:
   hosts:
     ip-172-31-17-205.eu-west-1.compute.internal:
+    ip-172-31-37-229.eu-west-1.compute.internal:
+    ip-172-31-12-241.eu-west-1.compute.internal:
 kafka_broker:
   hosts:
     ip-172-31-21-162.eu-west-1.compute.internal:
+    ip-172-31-37-82.eu-west-1.compute.internal:
+    ip-172-31-4-48.eu-west-1.compute.internal:
