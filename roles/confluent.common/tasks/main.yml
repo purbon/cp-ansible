@@ -42,3 +42,7 @@
     dest: "{{ jmxexporter_jar_path }}"
     mode: 0755
   when: jmxexporter_enabled|bool
+
+- name: Configure rbac when rbac is enabled
+  include: configure-rbac.yml
+  when: rbac_enabled|bool

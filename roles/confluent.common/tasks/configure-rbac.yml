@@ -1,0 +1,23 @@
+---
+# Generate the token service key
+- name: Create the tmp key directory
+  file:
+    path:  /tmp/rbac-keys/
+    state: directory
+    mode: '0755'
+  when: rbac_enabled|bool
+
+- name: Generate an RSA key keypair at /tmp/rbac-keys/keypair.pem
+  shell: openssl genrsa -out /tmp/rbac-keys/keypair.pem 2048
+  when: rbac_enabled|bool
+
+- name: Extract the public key at /tmp/rbac-keys/public.pem
+  shell: openssl rsa -in /tmp/rbac-keys/keypair.pem -outform PEM -pubout -out /tmp/rbac-keys/public.pem
+  when: rbac_enabled|bool
+
+- name: Copy rbac token keys to Ansible Host
+  synchronize:
+    src: /tmp/rbac-keys/
+    dest: generated_token_keys
+    mode: pull
+    use_ssh_args: yes

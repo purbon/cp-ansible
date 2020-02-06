@@ -13,6 +13,10 @@
     include_tasks: tasks/certificate_authority.yml
     run_once: true
     when: self_signed|bool and regenerate_ca|bool
+  - name: Create the token rbac keys and copy to the ansible host
+    include_tasks: tasks/configure-rbac.yml
+    run_once: true
+    when: rbac_enabled|bool and regenerate_ca|bool
 
 - name: Zookeeper Provisioning
   hosts: zookeeper

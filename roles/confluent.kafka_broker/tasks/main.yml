@@ -14,8 +14,16 @@
   when: ansible_os_family == "Debian"
 
 # Configure Environment
-- name: Configure rbac when rbac is enabled
-  include: configure-rbac.yml
+- name: Copy geneated keypair.pem to host
+  copy:
+    src: "generated_token_keys/keypair.pem"
+    dest: {{ mds_default_keypair }}
+  when: rbac_enabled|bool
+
+- name: Copy geneated public.pem to host
+  copy:
+    src: "generated_token_keys/public.pem"
+    dest: {{ mds_default_public_key }}
   when: rbac_enabled|bool
 
 - name: Kafka Broker group
