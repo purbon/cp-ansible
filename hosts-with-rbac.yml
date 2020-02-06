@@ -85,7 +85,10 @@ all:
     kafka_broker:
       properties:
         num.io.threads: 15
-        super.users: User:admin;User:CN=ip-172-31-21-162.eu-west-1.compute.internal,OU=TEST,O=CONFLUENT,L=PaloAlto,ST=Ca,C=US
+        ssl.principal.mapping.rules: |
+           RULE:^CN=(.*?),.*$/$1/L,
+           DEFAULT
+        super.users: User:admin;User:ip-172-31-21-162.eu-west-1.compute.internal;User:ip-172-31-37-82.eu-west-1.compute.internal;User:ip-172-31-4-48.eu-west-1.compute.internal
     # schema_registry:
     #   properties:
     #     key: val
