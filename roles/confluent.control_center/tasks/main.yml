@@ -1,7 +1,7 @@
 - name: Copy geneated public.pem to host
   copy:
     src: "generated_token_keys/public.pem"
-    dest: {{ mds_default_public_key }}
+    dest: "{{ mds_default_public_key }}"
   when: rbac_enabled|bool
 # Install Packages
 - name: Install the Control Center Packages
