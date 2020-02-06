@@ -35,7 +35,7 @@ all:
     rbac_enabled: true
 
     mds_openapi_enabled: true
-    mds_ldap_server: ip-172-31-10-47.eu-west-1.compute.internal
+    mds_ldap_server: ip-172-31-10-47.eu-west-1.compute.internal:389
     mds_ldap_credentials: admin
 
     kafka_broker_default_interal_replication_factor: 1
