@@ -125,12 +125,7 @@ all:
          num.io.threads: 15
          authorizer.class.name: kafka.security.auth.SimpleAclAuthorizer
          allow.everyone.if.no.acl.found: false
-         ssl.principal.mapping.rules: |
-           RULE:^CN=ip-172-31-18-9.eu-west-1.compute.internal,.*$/kafka/L,
-           RULE:^CN=ip-172-31-38-242.eu-west-1.compute.internal,.*$/kafka/L,
-           RULE:^CN=ip-172-31-5-221.eu-west-1.compute.internal,.*$/kafka/L,
-           RULE:^CN=(.*?),.*$/$1/L,
-           DEFAULT
+         ssl.principal.mapping.rules: RULE:^CN=ip-172-31-18-9.eu-west-1.compute.internal,.*$/kafka/L, RULE:^CN=ip-172-31-38-242.eu-west-1.compute.internal,.*$/kafka/L,RULE:^CN=ip-172-31-5-221.eu-west-1.compute.internal,.*$/kafka/L,RULE:^CN=(.*?),.*$/$1/L,DEFAULT
          super.users: User:kafka
     # schema_registry:
     #   properties:
