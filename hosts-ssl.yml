@@ -168,3 +168,6 @@ kafka_broker:
       # broker_id: 2
     ip-172-31-5-221.eu-west-1.compute.internal:
       # broker_id: 1
+control_center:
+  hosts:
+    ec2-34-247-177-58.eu-west-1.compute.amazonaws.com:
