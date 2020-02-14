@@ -80,10 +80,14 @@ log4j.logger.kafka=WARN
 log4j.logger.org.apache.kafka=WARN
 
 # Change to DEBUG or TRACE to enable request logging
-log4j.logger.kafka.request.logger=DEBUG, requestAppender
+log4j.logger.kafka.request.logger=WARN, requestAppender
 log4j.additivity.kafka.request.logger=false
 # Uncomment the lines below and change log4j.logger.kafka.network.RequestChannel$ to TRACE for additional output
 # related to the handling of requests
+log4j.logger.kafka.network.Processor=DEBUG, requestAppender
+log4j.logger.kafka.server.KafkaApis=DEBUG, requestAppender
+log4j.additivity.kafka.server.KafkaApis=true
+
 #log4j.logger.kafka.network.Processor=TRACE, requestAppender
 #log4j.logger.kafka.server.KafkaApis=TRACE, requestAppender
 #log4j.additivity.kafka.server.KafkaApis=false
