@@ -1,0 +1,19 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: kafka_broker
+  tasks:
+    - name: Get Stats on override.conf
+      stat:
+        path: /etc/systemd/system/confluent-server.service.d/override.conf
+      register: override_conf
+    - name: Example assertion
+      assert:
+        that: false
+    - name: Assert ownership on override.conf
+      assert:
+        that:
+          - override_conf.stat.gr_name == "confluent"
+          - override_conf.stat.pw_name == "cp-kafka"
+        quiet: yes

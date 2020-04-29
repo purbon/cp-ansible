@@ -1,0 +1,40 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: zookeeper1
+    image: geerlingguy/docker-centos7-ansible
+    dockerfile: Dockerfile.j2
+    command: ""
+    groups:
+      - zookeeper
+    pre_build_image: true
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    networks:
+      - name: confluent
+  - name: kafka_broker1
+    image: geerlingguy/docker-centos7-ansible
+    command: ""
+    groups:
+      - kafka_broker
+    dockerfile: Dockerfile.j2
+    pre_build_image: true
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    networks:
+      - name: confluent
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      hash_behaviour: merge
+  playbooks:
+    prepare: ../prepare.yml
+    converge: ../converge.yml
+verifier:
+  name: ansible

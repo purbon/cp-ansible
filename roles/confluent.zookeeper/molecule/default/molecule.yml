@@ -1,0 +1,31 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: zookeeper
+    image: geerlingguy/docker-centos7-ansible
+    dockerfile: Dockerfile.j2
+    command: ""
+    pre_build_image: true
+    privileged: true
+    groups:
+      - zookeeper
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    networks:
+      - name: confluent
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      hash_behaviour: merge
+  inventory:
+    group_vars:
+      all:
+        zookeeper:
+          properties:
+            syncLimit: 3
+verifier:
+  name: ansible

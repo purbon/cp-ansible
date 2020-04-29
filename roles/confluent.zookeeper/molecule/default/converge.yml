@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: zookeeper
+  tasks:
+    - name: "Include confluent.zookeeper"
+      include_role:
+        name: "confluent.zookeeper"

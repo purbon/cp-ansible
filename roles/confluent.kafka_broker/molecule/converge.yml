@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: kafka_broker
+  tasks:
+    - name: "Include confluent.kafka_broker"
+      include_role:
+        name: "confluent.kafka_broker"
