@@ -10,10 +10,18 @@
       register: override_conf
     - name: Example assertion
       assert:
-        that: false
+        that: true
     - name: Assert ownership on override.conf
       assert:
         that:
           - override_conf.stat.gr_name == "confluent"
           - override_conf.stat.pw_name == "cp-kafka"
+        quiet: yes
+    - name: fetch default config for log.retention.hours
+      shell: cat /etc/kafka/server.properties | grep log.retention.hours=168
+      register: log_retention_hours
+    - name: Assert log_retention_hours
+      assert:
+        that:
+          - log_retention_hours.stdout == "log.retention.hours=168"
         quiet: yes
